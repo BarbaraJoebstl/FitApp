@@ -1,10 +1,20 @@
 import React from 'react'
-import {View, Text} from 'react-native'
+import {View, Slider, StyleSheet, Text} from 'react-native'
 
-export default function USlider() {
+export default function USlider({ max, unit, step, value, onChange }) {
     return (
         <View>
-            <Text>HELLO FROM SLIDER</Text>
+              <Slider
+        step={step}
+        value={value}
+        maximumValue={max}
+        minimumValue={0}
+        onValueChange={onChange}
+      />
+      <View>
+        <Text>{value}</Text>
+        <Text>{unit}</Text>
+      </View>
         </View>    
     )
 }
