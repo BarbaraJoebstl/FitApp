@@ -10,6 +10,7 @@ import { purple, white } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 import EntryDetail from './components/EntryDetail'
+import Live from './components/Live'
 
 function UStatusBar ({backgroundColor, ...props}) {
   return (
@@ -23,6 +24,7 @@ const Tabs = createMaterialTopTabNavigator(
   {
     History: History,
     AddEntry: AddEntry,
+    Live: Live
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -30,13 +32,23 @@ const Tabs = createMaterialTopTabNavigator(
         const { routeName } = navigation.state;
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
-        return routeName === 'History' ? (
-          <Ionicons name="ios-bookmarks" size={30} color={tintColor} />
-        ) : (
-          <FontAwesome name="plus-square" size={30} color={tintColor} />
+        switch (routeName){
+        case 'History':
+          return  (
+            <Ionicons name="ios-bookmarks" size={30} color={tintColor} />
+          )
+        case 'AddEntry':
+            return (
+              <FontAwesome name="plus-square" size={30} color={tintColor} />
+            );
+        case 'Live':
+          return (
+          <FontAwesome name="ios-speedometer" size={30} color={tintColor} />
         );
+        }
       },
     }),
+
     tabBarOptions: {
       showIcon: true,
       activeTintColor: Platform.OS === 'ios' ? purple : white,
